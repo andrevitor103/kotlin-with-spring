@@ -1,9 +1,8 @@
-package com.example.demo.repository.sql
+package com.example.demo.repository
 
 import com.example.demo.Message
-import com.example.demo.repository.MessageRepository
 
-class SqlRepositoryAdapter(private val connection: SqlConnectionAdapter) : MessageRepository {
+class MessageRepositoryAdapter(private val connection: Connection): MessageRepository {
     override fun findAll(): List<Message> {
         return connection.findAll()
     }
