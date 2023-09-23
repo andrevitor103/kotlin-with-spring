@@ -1,17 +1,12 @@
 package com.example.demo
 
-import org.springframework.jdbc.core.JdbcTemplate
+import com.example.demo.repository.crudSpring.CrudRepositoryAdapter
 import org.springframework.stereotype.Service
-import java.util.UUID
 
 @Service
-class MessageService(val db: JdbcTemplate) {
-    fun findMessages(): List<Message> = db.query("select * from messages") {
-        response, _ -> Message(response.getString("id"), response.getString("text"))
-    }
+class MessageService(val db: CrudRepositoryAdapter) {
+    fun findMessages(): List<Message> = db.findAll()
 
-    fun save(message: Message) {
-        val id = message.id ?: UUID.randomUUID().toString()
-        db.update("insert into messages values (?, ?)", id, message.text)
-    }
+    fun findMessageById(id: String): List<Message> = db.findById(id)
+    fun save(message: Message) = db.save(message)
 }
