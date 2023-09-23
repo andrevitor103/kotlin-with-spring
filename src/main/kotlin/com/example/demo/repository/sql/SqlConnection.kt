@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.query
 import java.util.*
 
-class SqlConnectionAdapter(private val db: JdbcTemplate) : Connection {
+class SqlConnection(private val db: JdbcTemplate) : Connection {
     override fun findAll(): List<Message> = db.query("select * from messages") {
         response, _ -> Message(response.getString("id"), response.getString("text"))
     }
