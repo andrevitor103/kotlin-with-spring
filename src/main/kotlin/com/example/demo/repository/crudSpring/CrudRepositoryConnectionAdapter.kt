@@ -5,7 +5,7 @@ import com.example.demo.repository.Connection
 import org.springframework.data.repository.CrudRepository
 import java.util.Optional
 
-class CrudRepositoryConnectionAdapter(val db: CrudRepository<Message, String>) : Connection {
+class CrudRepositoryConnectionAdapter(private val db: CrudRepository<Message, String>) : Connection {
     override fun findAll(): List<Message> {
         return db.findAll().toList()
     }
